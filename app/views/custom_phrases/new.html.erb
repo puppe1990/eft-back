@@ -1,0 +1,29 @@
+<h1>New Custom Phrase</h1>
+
+<%= form_for(@custom_phrase) do |f| %>
+  <%= f.label :name %> 
+  <%= f.text_field :name %>
+  <%= f.check_box :active %> Active?
+  
+<table>
+  <thead>
+    <tr>
+      <th>Select</th>
+      <th>Description</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% Phrase.all.each do |phrase| %>
+      <tr>
+        <td><%= f.check_box :phrase_ids, { multiple: true }, phrase.id, nil %></td>
+        <td><%= phrase.description %></td>
+        <td><%= phrase.category.name %></td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table> 
+  
+  <%= f.submit "Create Custom Phrase" %>
+<% end %>

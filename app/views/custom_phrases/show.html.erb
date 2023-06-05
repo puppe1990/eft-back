@@ -1,0 +1,31 @@
+<h1><%= @custom_phrase.name %> - <%= @custom_phrase.phrases.count() %></h1>
+
+<ul>
+  <% @custom_phrase.phrases.each do |phrase| %>
+    <li><%= phrase.description %></li>
+  <% end %>
+</ul>
+
+<%= form_for(@custom_phrase) do |f| %>
+  <%= f.check_box :active %> Active?
+  <table>
+  <thead>
+    <tr>
+      <th>Select</th>
+      <th>Description</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% Phrase.all.each do |phrase| %>
+      <tr>
+        <td><%= f.check_box :phrase_ids, { multiple: true }, phrase.id, nil %></td>
+        <td><%= phrase.description %></td>
+        <td><%= phrase.category.name %></td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table> 
+  <%= f.submit "Update Phrases" %>
+<% end %> 

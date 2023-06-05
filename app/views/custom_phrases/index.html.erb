@@ -1,0 +1,14 @@
+<h1>Custom Phrase Sets</h1>
+
+<ul>
+  <% @custom_phrases.each do |custom_phrase| %>
+    <li>
+      <%= link_to custom_phrase.name, custom_phrase_path(custom_phrase) %> 
+      Active? <%= custom_phrase.active%>
+      <%= link_to "Delete", custom_phrase, method: :delete, data: { confirm: "Are you sure?" } %>
+
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Custom Phrase", new_custom_phrase_path %>

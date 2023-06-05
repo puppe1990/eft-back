@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_204759) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_174835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_204759) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_phrases", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active", default: false
+  end
+
+  create_table "custom_phrases_phrases", id: false, force: :cascade do |t|
+    t.bigint "custom_phrase_id", null: false
+    t.bigint "phrase_id", null: false
+    t.index ["custom_phrase_id", "phrase_id"], name: "index_custom_phrases_phrases_on_custom_phrase_id_and_phrase_id"
+    t.index ["phrase_id", "custom_phrase_id"], name: "index_custom_phrases_phrases_on_phrase_id_and_custom_phrase_id"
   end
 
   create_table "phrases", force: :cascade do |t|
